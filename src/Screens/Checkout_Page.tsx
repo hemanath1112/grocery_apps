@@ -1,12 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const First_Page = () => {
+const Checkout_Page = () => {
   return (
     <View>
-      <Text>First_Page</Text>
+      <Text>Checkout_Page</Text>
     </View>
   );
 };
 
-export default First_Page;
+export default Checkout_Page;
