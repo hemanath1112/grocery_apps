@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const Checkout_Page = () => {
+const CheckoutPage = () => {
   return (
     <View>
       <Text>Checkout_Page</Text>
@@ -9,4 +9,4 @@ const Checkout_Page = () => {
   );
 };
 
-export default Checkout_Page;
+export default CheckoutPage;
