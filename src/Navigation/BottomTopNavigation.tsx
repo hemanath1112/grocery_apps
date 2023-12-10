@@ -1,9 +1,8 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable quotes */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomePage, SearchPage, CartPage} from '../Screens/index';
+import {HomePage, SearchPage, UserPage} from '../Screens/index';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Gray, Green} from '../Components/Color';
 
 const BottomTopNavigation = () => {
@@ -58,13 +57,13 @@ const BottomTopNavigation = () => {
       />
       <Tab.Screen
         name="Cart"
-        component={CartPage}
+        component={UserPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => {
             return (
-              <FontAwesome
-                name="shopping-cart"
+              <FontAwesome5
+                name="user-alt"
                 size={24}
                 color={focused ? Green : Gray}
               />

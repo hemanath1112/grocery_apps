@@ -5,4 +5,5 @@ import LoginPage from './LoginPage';
 import SearchPage from './SearchPage';
 import CartPage from './CartPage';
 import CheckoutPage from './CheckoutPage';
-export {HomePage, LoginPage, SearchPage, CartPage, CheckoutPage};
+import UserPage from './UserPage';
+export {HomePage, LoginPage, SearchPage, CartPage, CheckoutPage, UserPage};
