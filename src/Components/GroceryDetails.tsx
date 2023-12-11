@@ -1,10 +1,24 @@
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
-import {GreenLight} from './Color';
+import {Black, Green, GreenLight, MindNightBule, Red} from './Color';
+import {
+  PoppinsBold,
+  PoppinsMedium,
+  PoppinsRegular,
+  PoppinsSemiBold,
+} from './Fonts';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 const GroceryDetails = ({item}) => {
+  const navigation = useNavigation();
+
+  const gotoDetailsPage = () => {
+    navigation.navigate('productDetails');
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={gotoDetailsPage}>
       <View style={styles.groceryDetailsContainer}>
         <View style={styles.ImageContainer}>
           <Image
@@ -27,14 +41,16 @@ const GroceryDetails = ({item}) => {
             modi enim quibusdam aspernatur molestiae fugiat necessitatibus
             minima ipsum vero! Autem, fugiat.
           </Text>
-          <Text style={styles.productDiscount}>
-            <Text>Discount</Text> $70
-          </Text>
-          <Text style={styles.productPrice}>
-            <Text>Price</Text> $77778
-          </Text>
+          <View style={styles.priceItem}>
+            <Text style={styles.productPrice}>$77778</Text>
+            <Text style={styles.productDiscount}>
+              <Text>Off</Text> $70
+            </Text>
+          </View>
         </View>
-        {/* <Text>{item.name}</Text> */}
+        <TouchableOpacity style={styles.addItem}>
+          <MaterialIcons name="add-circle" size={35} color={MindNightBule} />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -45,7 +61,7 @@ export default GroceryDetails;
 const styles = StyleSheet.create({
   groceryDetailsContainer: {
     width: 182,
-    height: 260,
+    height: 270,
     marginEnd: 22,
     borderRadius: 15,
     backgroundColor: GreenLight,
@@ -64,5 +80,36 @@ const styles = StyleSheet.create({
   },
   productDetails: {
     padding: 12,
+  },
+  productTitle: {
+    fontFamily: PoppinsBold,
+    fontSize: 18,
+    color: MindNightBule,
+  },
+  productDis: {
+    fontFamily: PoppinsSemiBold,
+    fontSize: 12,
+    color: MindNightBule,
+  },
+  priceItem: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    lineHeight: 1,
+    gap: 5,
+  },
+  productDiscount: {
+    fontFamily: PoppinsMedium,
+    fontSize: 12,
+    color: Red,
+  },
+  productPrice: {
+    fontSize: 16,
+    fontFamily: PoppinsBold,
+    color: Green,
+  },
+  addItem: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
 });
