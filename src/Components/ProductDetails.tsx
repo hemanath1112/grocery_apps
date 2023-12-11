@@ -1,10 +1,15 @@
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {MindNightBule, White, Red} from './Color';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import {MindNightBule, White, Red, Black} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
+import {useRoute} from '@react-navigation/native';
 
 const ProductDetails = ({navigation}) => {
+  const route = useRoute();
+  const {item} = route.params;
+  console.log(item);
   const goBack = () => {
     navigation.goBack();
   };
@@ -21,18 +26,18 @@ const ProductDetails = ({navigation}) => {
       </View>
       <Image
         source={{
-          uri: 'https://img.freepik.com/premium-photo/shopping-bag-full-fresh-fruits-vegetables-with-assorted-ingredients_8087-2232.jpg',
+          uri: item.image,
         }}
         style={styles.detailsImage}
       />
       <View style={styles.details}>
         <View style={styles.topDetails}>
-          <Text style={styles.title}>Product</Text>
+          <Text style={styles.title}>{item.name}</Text>
           <View style={styles.priceItem}>
             <Text style={styles.productDiscount}>
-              <Text>Off</Text> $70
+              <Text>Off</Text> &#8377;{item.offer}
             </Text>
-            <Text style={styles.price}>Product</Text>
+            <Text style={styles.price}> &#8377;{item.price}</Text>
           </View>
         </View>
 
@@ -47,6 +52,21 @@ const ProductDetails = ({navigation}) => {
             <Text style={styles.ratingRank}> (4.9)</Text>
           </View>
         </View>
+
+        <View style={styles.itemDescription}>
+          <Text style={styles.descriptionTitle}>Description</Text>
+          <Text style={styles.descriptionContent}>{item.discription}</Text>
+        </View>
+
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.buyNowButton}>
+            <Text style={styles.buyNowText}>Buy Now</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.addItemButton}>
+            <Fontisto name="shopping-bag" size={28} color={White} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -57,6 +77,8 @@ export default ProductDetails;
 const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
+    backgroundColor: White,
+    height: '100%',
   },
   headerItem: {
     flexDirection: 'row',
@@ -90,6 +112,7 @@ const styles = StyleSheet.create({
     fontFamily: PoppinsBold,
     fontSize: 20,
     color: MindNightBule,
+    width: 250,
   },
   price: {
     fontFamily: PoppinsBold,
@@ -122,5 +145,48 @@ const styles = StyleSheet.create({
   ratingRank: {
     fontSize: 12,
     fontFamily: PoppinsMedium,
+  },
+  itemDescription: {
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  descriptionTitle: {
+    fontFamily: PoppinsSemiBold,
+    color: Black,
+    fontSize: 18,
+  },
+  descriptionContent: {
+    fontFamily: PoppinsMedium,
+    fontSize: 14,
+    textAlign: 'justify',
+  },
+  buttonRow: {
+    marginTop: 12,
+    marginHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  buyNowButton: {
+    backgroundColor: Black,
+    padding: 10,
+    borderRadius: 25,
+    width: '80%',
+  },
+  buyNowText: {
+    color: White,
+    textAlign: 'center',
+    fontFamily: PoppinsBold,
+    textTransform: 'uppercase',
+    fontSize: 16,
+  },
+  addItemButton: {
+    backgroundColor: Black,
+    padding: 10,
+    borderRadius: 50,
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

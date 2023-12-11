@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
-import {Gray, Green, Red} from './Color';
+import {Gray, Green} from './Color';
 
 const SliderItem = () => {
   const slider = [

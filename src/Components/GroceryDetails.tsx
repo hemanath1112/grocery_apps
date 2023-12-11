@@ -1,12 +1,7 @@
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
-import {Black, Green, GreenLight, MindNightBule, Red} from './Color';
-import {
-  PoppinsBold,
-  PoppinsMedium,
-  PoppinsRegular,
-  PoppinsSemiBold,
-} from './Fonts';
+import {Green, GreenLight, MindNightBule, Red} from './Color';
+import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 
@@ -14,7 +9,7 @@ const GroceryDetails = ({item}) => {
   const navigation = useNavigation();
 
   const gotoDetailsPage = () => {
-    navigation.navigate('productDetails');
+    navigation.navigate('productDetails', {item});
   };
 
   return (
@@ -23,28 +18,22 @@ const GroceryDetails = ({item}) => {
         <View style={styles.ImageContainer}>
           <Image
             source={{
-              uri: 'https://img.freepik.com/premium-photo/shopping-bag-full-fresh-fruits-vegetables-with-assorted-ingredients_8087-2232.jpg',
+              uri: item.image,
             }}
             style={styles.imageBox}
           />
         </View>
         <View style={styles.productDetails}>
           <Text style={styles.productTitle} numberOfLines={1}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-            laborum earum hic placeat quaerat reprehenderit repellat optio
-            aspernatur natus iste saepe soluta, deleniti blanditiis amet
-            nesciunt molestias ratione adipisci necessitatibus!
+            {item.name}
           </Text>
           <Text style={styles.productDis} numberOfLines={1}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            adipisci ducimus harum quam tempora quo suscipit quae, corporis,
-            modi enim quibusdam aspernatur molestiae fugiat necessitatibus
-            minima ipsum vero! Autem, fugiat.
+            {item.discription}
           </Text>
           <View style={styles.priceItem}>
-            <Text style={styles.productPrice}>$77778</Text>
+            <Text style={styles.productPrice}>&#8377;{item.price}</Text>
             <Text style={styles.productDiscount}>
-              <Text>Off</Text> $70
+              <Text>Off</Text> &#8377;{item.offer}
             </Text>
           </View>
         </View>
@@ -60,7 +49,7 @@ export default GroceryDetails;
 
 const styles = StyleSheet.create({
   groceryDetailsContainer: {
-    width: 182,
+    width: 180,
     height: 270,
     marginEnd: 22,
     borderRadius: 15,

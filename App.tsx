@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomTopNavigation from './src/Navigation/BottomTopNavigation';
 import {CartPage, CheckoutPage} from './src/Screens';
-import ProductDetails from './src/Components/ProductDetails';
+import {ProductDetails, ProductItems} from './src/Components/index';
 
 const App = () => {
   const stack = createNativeStackNavigator();
@@ -28,6 +28,11 @@ const App = () => {
         <stack.Screen
           name="productDetails"
           component={ProductDetails}
+          options={{headerShown: false}}
+        />
+        <stack.Screen
+          name="productItems"
+          component={ProductItems}
           options={{headerShown: false}}
         />
       </stack.Navigator>

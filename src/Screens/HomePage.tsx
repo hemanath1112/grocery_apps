@@ -9,9 +9,12 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import React from 'react';
 import {PoppinsRegular, PoppinsSemiBold} from '../Components/Fonts';
 import {Black, Green, White} from '../Components/Color';
-import SearchItem from '../Components/SearchItem';
-import SliderItem from '../Components/SliderItem';
-import GroceryItem from '../Components/GroceryItem';
+import {
+  SearchItem,
+  SliderItem,
+  GroceryItem,
+  SeeMore,
+} from '../Components/index';
 
 const HomePage = ({navigation}: any) => {
   const goToCartPage = () => {
@@ -39,6 +42,7 @@ const HomePage = ({navigation}: any) => {
       </View>
       <SearchItem />
       <SliderItem />
+      <SeeMore />
       <GroceryItem />
     </SafeAreaView>
   );
