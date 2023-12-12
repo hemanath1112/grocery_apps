@@ -1,4 +1,4 @@
-const Item = [
+export const Item = [
   {
     id: 1,
     name: 'MTR Rava Idli Mix 1Kg',
@@ -98,5 +98,3 @@ const Item = [
       'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/416C+2z7ltL._SY300_SX300_.jpg',
   },
 ];
-
-export default Item;

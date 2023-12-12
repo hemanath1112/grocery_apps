@@ -1,12 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+
+interface CartItem {
+  id: number;
+  quantity: number;
+  name: string;
+}
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: [],
+  initialState: [] as CartItem[],
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       const isAvailable = state.find(
-        value => value.item.name === action.payload.item.name,
+        value => value.name === action.payload.name,
       );
       if (isAvailable) {
         isAvailable.quantity += 1;
@@ -14,15 +20,13 @@ const cartSlice = createSlice({
         state.push({...action.payload, quantity: 1});
       }
     },
-    removeToCart: (state, action) => {
-      const newList = state.filter(
-        value => value.item.name != action.payload.item.name,
-      );
+    removeToCart: (state, action: PayloadAction<CartItem>) => {
+      const newList = state.filter(value => value.name !== action.payload.name);
       return newList;
     },
-    itemIncrement: (state, action) => {
+    itemIncrement: (state, action: PayloadAction<CartItem>) => {
       const isAvailable = state.find(
-        value => value.item.name === action.payload.item.name,
+        value => value.name === action.payload.name,
       );
 
       if (isAvailable) {
@@ -33,9 +37,9 @@ const cartSlice = createSlice({
         console.log('====================================');
       }
     },
-    itemDecrement: (state, action) => {
+    itemDecrement: (state, action: PayloadAction<CartItem>) => {
       const isAvailable = state.find(
-        value => value.item.name === action.payload.item.name,
+        value => value.name === action.payload.name,
       );
 
       if (isAvailable && isAvailable.quantity > 1) {

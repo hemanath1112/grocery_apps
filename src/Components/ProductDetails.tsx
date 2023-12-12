@@ -3,16 +3,29 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {MindNightBule, White, Red, Black} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../Redux/CartSlice';
 
-const ProductDetails = ({navigation}) => {
-  const route = useRoute();
+interface ProductDetailsProps {
+  route: {
+    params: {
+      main: {
+        name: string;
+        price: number;
+        discription: string;
+        offer: number;
+        image: string;
+      };
+    };
+  };
+}
 
+const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  const {item} = route.params;
+  const {name, price, discription, offer, image} = route.params.main;
+  const dataItem = route.params.main;
 
   const goBack = () => {
     navigation.goBack();
@@ -20,9 +33,10 @@ const ProductDetails = ({navigation}) => {
 
   const addToCartHandler = () => {
     console.log('Adding to cart');
-    dispatch(addToCart(route.params));
+    dispatch(addToCart(dataItem));
     navigation.navigate('Cart');
   };
+
   return (
     <View style={styles.detailsContainer}>
       <View style={styles.headerItem}>
@@ -36,18 +50,18 @@ const ProductDetails = ({navigation}) => {
       </View>
       <Image
         source={{
-          uri: item.image,
+          uri: image,
         }}
         style={styles.detailsImage}
       />
       <View style={styles.details}>
         <View style={styles.topDetails}>
-          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.title}>{name}</Text>
           <View style={styles.priceItem}>
             <Text style={styles.productDiscount}>
-              <Text>Off</Text> &#8377;{item.offer}
+              <Text>Off</Text> &#8377;{offer}
             </Text>
-            <Text style={styles.price}> &#8377;{item.price}</Text>
+            <Text style={styles.price}> &#8377;{price}</Text>
           </View>
         </View>
 
@@ -65,13 +79,14 @@ const ProductDetails = ({navigation}) => {
 
         <View style={styles.itemDescription}>
           <Text style={styles.descriptionTitle}>Description</Text>
-          <Text style={styles.descriptionContent}>{item.discription}</Text>
+          <Text style={styles.descriptionContent}>{discription}</Text>
         </View>
 
         <View style={styles.buttonRow}>
           <TouchableOpacity
             style={styles.buyNowButton}
-            onPress={addToCartHandler}>
+            onPress={addToCartHandler}
+            activeOpacity={0.8}>
             <Text style={styles.buyNowText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
@@ -176,6 +191,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buyNowButton: {
+    // height: 60,
     backgroundColor: Black,
     padding: 10,
     borderRadius: 25,

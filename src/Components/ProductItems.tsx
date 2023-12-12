@@ -2,8 +2,8 @@ import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import React, {useEffect} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {MindNightBule} from './Color';
-import {PoppinsBold, PoppinsRegular, PoppinsSemiBold} from './Fonts';
-import Item from './Data';
+import {dataItem, PoppinsRegular, PoppinsSemiBold} from './Fonts';
+import {Item} from './Data';
 import {GroceryDetails} from './index';
 import {useState} from 'react';
 
@@ -44,7 +44,7 @@ const ProductItems = ({navigation}) => {
           <FlatList
             data={Item}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.contentContainer}
             numColumns={2}
             ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}

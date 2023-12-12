@@ -42,7 +42,7 @@ const SearchPage = () => {
           />
         </View>
         <View style={styles.fontIcon}>
-          <TouchableOpacity onPress={searchHandler}>
+          <TouchableOpacity onPress={searchHandler} activeOpacity={0.8}>
             <FontAwesome name="search" style={styles.iconText} />
           </TouchableOpacity>
         </View>

@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-import {Black, Gray, MindNightBule, Red, White} from '../Components/Color';
+import {Black, MindNightBule, Red, White} from '../Components/Color';
 import {Image} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -21,17 +21,17 @@ const CartItem = ({item, index}: any) => {
       <View style={styles.imageContainer}>
         <Image
           source={{
-            uri: item.item.image,
+            uri: item.image,
           }}
           style={styles.productImage}
         />
       </View>
       <View style={styles.discriptionCondainer}>
         <Text style={styles.title} numberOfLines={1}>
-          {item.item.name}
+          {item.name}
         </Text>
         <Text style={styles.discription} numberOfLines={2}>
-          {item.item.discription}
+          {item.discription}
         </Text>
         <View style={styles.addItemContainer}>
           <View style={styles.itemAdd}>
@@ -53,10 +53,7 @@ const CartItem = ({item, index}: any) => {
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.price}>
-            {' '}
-            &#8377;{item.quantity * item.item.price}
-          </Text>
+          <Text style={styles.price}> &#8377;{item.quantity * item.price}</Text>
         </View>
         <TouchableOpacity
           style={styles.removeItem}

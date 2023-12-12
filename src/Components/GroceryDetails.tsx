@@ -2,17 +2,31 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {Green, GreenLight, MindNightBule, Red} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart} from '../Redux/CartSlice';
 
-const GroceryDetails = ({item}) => {
+interface GroceryDetailsProps {
+  item: {
+    id: number;
+    name: string;
+    image: string;
+    discription: string;
+    price: number;
+    offer: number;
+  };
+}
+
+const GroceryDetails: React.FC<GroceryDetailsProps> = ({item}) => {
   const navigation = useNavigation();
 
   const gotoDetailsPage = () => {
-    navigation.navigate('productDetails', {item});
+    navigation.navigate('productDetails', {main: item});
   };
   const dispatch = useDispatch();
+
+  const storeData = useSelector(state => state.CartSlice);
 
   return (
     <TouchableOpacity onPress={gotoDetailsPage}>
@@ -39,8 +53,10 @@ const GroceryDetails = ({item}) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.addItem} onPress={gotoDetailsPage}>
-          <AntDesign name="rightcircleo" size={25} color={MindNightBule} />
+        <TouchableOpacity
+          style={styles.addItem}
+          onPress={() => dispatch(addToCart(item))}>
+          <MaterialIcons name="add-circle" size={35} color={MindNightBule} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
@@ -100,7 +116,7 @@ const styles = StyleSheet.create({
   },
   addItem: {
     position: 'absolute',
-    bottom: 10,
-    right: 10,
+    bottom: 5,
+    right: 5,
   },
 });

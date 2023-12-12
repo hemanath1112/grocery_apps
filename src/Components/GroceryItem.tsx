@@ -1,7 +1,7 @@
 import {View, FlatList, StyleSheet} from 'react-native';
 import React from 'react';
 import GroceryDetails from './GroceryDetails';
-import Item from './Data';
+import {Item} from './Data';
 
 const GroceryItem = () => {
   const renderItem = ({item}: any) => {

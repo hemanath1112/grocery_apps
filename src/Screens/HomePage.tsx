@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+// import Fontisto from 'react-native-vector-icons/Fontisto';
 import React from 'react';
 import {PoppinsRegular, PoppinsSemiBold} from '../Components/Fonts';
 import {Black, Green, White} from '../Components/Color';

@@ -13,7 +13,7 @@ const SeeMore = ({}) => {
     <View style={styles.seeContainer}>
       <Text style={styles.titleName}>Products</Text>
       <View>
-        <TouchableOpacity onPress={goToProductItem}>
+        <TouchableOpacity onPress={goToProductItem} activeOpacity={0.8}>
           <Foundation name="indent-more" size={25} color={MindNightBule} />
         </TouchableOpacity>
       </View>
