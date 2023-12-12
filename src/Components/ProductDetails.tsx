@@ -1,17 +1,27 @@
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import {MindNightBule, White, Red, Black} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
 import {useRoute} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {addToCart} from '../Redux/CartSlice';
 
 const ProductDetails = ({navigation}) => {
   const route = useRoute();
+
+  const dispatch = useDispatch();
+
   const {item} = route.params;
-  console.log(item);
+
   const goBack = () => {
     navigation.goBack();
+  };
+
+  const addToCartHandler = () => {
+    console.log('Adding to cart');
+    dispatch(addToCart(route.params));
+    navigation.navigate('Cart');
   };
   return (
     <View style={styles.detailsContainer}>
@@ -59,12 +69,10 @@ const ProductDetails = ({navigation}) => {
         </View>
 
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.buyNowButton}>
-            <Text style={styles.buyNowText}>Buy Now</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.addItemButton}>
-            <Fontisto name="shopping-bag" size={28} color={White} />
+          <TouchableOpacity
+            style={styles.buyNowButton}
+            onPress={addToCartHandler}>
+            <Text style={styles.buyNowText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -171,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: Black,
     padding: 10,
     borderRadius: 25,
-    width: '80%',
+    width: '100%',
   },
   buyNowText: {
     color: White,

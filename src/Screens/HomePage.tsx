@@ -31,12 +31,12 @@ const HomePage = ({navigation}: any) => {
             </Text>
           </View>
           <View>
-            <TouchableOpacity onPress={goToCartPage}>
+            {/* <TouchableOpacity onPress={goToCartPage}>
               <View style={styles.cartCount}>
                 <Text style={styles.countText}>8</Text>
               </View>
               <Fontisto name="shopping-bag" size={28} color={Black} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>

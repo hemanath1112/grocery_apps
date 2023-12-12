@@ -13,7 +13,7 @@ const GroceryItem = () => {
       <FlatList
         data={Item}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         horizontal
       />
     </View>

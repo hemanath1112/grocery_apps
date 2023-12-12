@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomePage, SearchPage, UserPage} from '../Screens/index';
+import {CartPage, HomePage, SearchPage, UserPage} from '../Screens/index';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Gray, Green} from '../Components/Color';
 
 const BottomTopNavigation = () => {
@@ -57,18 +57,19 @@ const BottomTopNavigation = () => {
       />
       <Tab.Screen
         name="Cart"
-        component={UserPage}
+        component={CartPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => {
             return (
-              <FontAwesome5
-                name="user-alt"
+              <Fontisto
+                name="shopping-bag"
                 size={24}
                 color={focused ? Green : Gray}
               />
             );
           },
+          tabBarBadge: 3,
         }}
       />
     </Tab.Navigator>

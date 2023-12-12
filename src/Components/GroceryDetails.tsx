@@ -2,8 +2,9 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {Green, GreenLight, MindNightBule, Red} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 
 const GroceryDetails = ({item}) => {
   const navigation = useNavigation();
@@ -11,6 +12,7 @@ const GroceryDetails = ({item}) => {
   const gotoDetailsPage = () => {
     navigation.navigate('productDetails', {item});
   };
+  const dispatch = useDispatch();
 
   return (
     <TouchableOpacity onPress={gotoDetailsPage}>
@@ -37,8 +39,8 @@ const GroceryDetails = ({item}) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.addItem}>
-          <MaterialIcons name="add-circle" size={35} color={MindNightBule} />
+        <TouchableOpacity style={styles.addItem} onPress={gotoDetailsPage}>
+          <AntDesign name="rightcircleo" size={25} color={MindNightBule} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
   },
   addItem: {
     position: 'absolute',
-    bottom: 5,
-    right: 5,
+    bottom: 10,
+    right: 10,
   },
 });

@@ -5,6 +5,7 @@ import SliderItem from './SliderItem';
 import GroceryDetails from './GroceryDetails';
 import GroceryItem from './GroceryItem';
 import ProductItems from './ProductItems';
+import CartItem from './CartItem';
 export {
   ProductDetails,
   SearchItem,
@@ -13,4 +14,5 @@ export {
   GroceryDetails,
   GroceryItem,
   ProductItems,
+  CartItem,
 };
