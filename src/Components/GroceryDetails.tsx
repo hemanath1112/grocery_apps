@@ -3,9 +3,10 @@ import React from 'react';
 import {Green, GreenLight, MindNightBule, Red} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addToCart} from '../Redux/CartSlice';
+import {addToCart, removeToCart} from '../Redux/CartSlice';
 
 interface GroceryDetailsProps {
   item: {
@@ -47,16 +48,33 @@ const GroceryDetails: React.FC<GroceryDetailsProps> = ({item}) => {
             {item.discription}
           </Text>
           <View style={styles.priceItem}>
-            <Text style={styles.productPrice}>&#8377;{item.price}</Text>
-            <Text style={styles.productDiscount}>
-              <Text>Off</Text> &#8377;{item.offer}
+            <Text>
+              <Text style={{fontSize: 16, color: Green}}>₹</Text>
+              <Text style={styles.productPrice}>{item.price}</Text>
+            </Text>
+            <Text>
+              <Text style={styles.productDiscount}>Off</Text>{' '}
+              <Text style={{fontSize: 12, color: Red}}>₹</Text>
+              <Text style={styles.productDiscount}>{item.offer}</Text>
             </Text>
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.addItem}
-          onPress={() => dispatch(addToCart(item))}>
-          <MaterialIcons name="add-circle" size={35} color={MindNightBule} />
+        <TouchableOpacity style={styles.addItem}>
+          {storeData.some(value => value.name == item.name) ? (
+            <MaterialCommunityIcons
+              name="minus-circle"
+              size={35}
+              color={Red}
+              onPress={() => dispatch(removeToCart(item))}
+            />
+          ) : (
+            <MaterialIcons
+              name="add-circle"
+              size={35}
+              color={MindNightBule}
+              onPress={() => dispatch(addToCart(item))}
+            />
+          )}
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

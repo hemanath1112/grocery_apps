@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
 import {
   View,
@@ -6,8 +7,9 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {PoppinsBold, PoppinsSemiBold} from '../Components/Fonts';
 import {
   Black,
@@ -20,11 +22,17 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {CartItem} from '../Components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
-const CartPage = ({navigation}) => {
+const CartPage = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const storeData = useSelector(state => state.CartSlice);
+
+  let Amount = 0;
+  storeData.forEach(element => {
+    Amount += element.price;
+  });
 
   const renterItem = ({item, index}) => {
     return <CartItem item={item} index={index} />;
@@ -36,6 +44,21 @@ const CartPage = ({navigation}) => {
 
   const ItemSeparatorComponent = () => {
     return <View style={styles.ItemSeparatorComponent} />;
+  };
+
+  const emptyCart = () => {
+    return (
+      <View style={styles.emptyImageContainer}>
+        <View>
+          <Image
+            source={{
+              uri: 'https://www.ruuhbythebrandstore.com/images/cart_is_empty.png',
+            }}
+            style={styles.emptyImage}
+          />
+        </View>
+      </View>
+    );
   };
 
   return (
@@ -60,15 +83,33 @@ const CartPage = ({navigation}) => {
           renderItem={renterItem}
           keyExtractor={item => item.id}
           ItemSeparatorComponent={ItemSeparatorComponent}
+          ListEmptyComponent={emptyCart}
         />
       </View>
 
       <View style={styles.checkOutItem}>
         <View style={styles.checkOutPage}>
-          <Text style={styles.checkOutAmount}>
-            Totel Amount: <Text style={styles.Amount}>300</Text>
+          <Text>
+            <Text
+              style={{
+                fontFamily: PoppinsBold,
+                fontSize: 20,
+                color: Black,
+              }}>
+              Totel Amount:{' '}
+            </Text>
+
+            <Text style={{fontSize: 16, color: Red}}>
+              ₹<Text style={styles.Amount}>{Amount}</Text>
+            </Text>
           </Text>
-          <TouchableOpacity activeOpacity={0.8}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              if (Amount !== 0) {
+                navigation.navigate('checkOut');
+              }
+            }}>
             <Text style={styles.checkOut}>Go To Checkout</Text>
           </TouchableOpacity>
         </View>
@@ -80,6 +121,12 @@ const CartPage = ({navigation}) => {
 export default CartPage;
 
 const styles = StyleSheet.create({
+  emptyImage: {
+    width: 200,
+    height: 200,
+    aspectRatio: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
     gap: 20,
@@ -112,7 +159,8 @@ const styles = StyleSheet.create({
     color: White,
     fontSize: 14,
     backgroundColor: Green,
-    padding: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 25,
     alignContent: 'center',
     borderRadius: 20,
   },
@@ -133,10 +181,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   Amount: {
+    fontFamily: PoppinsBold,
     fontSize: 16,
     color: Red,
   },
   flatList: {
     flex: 0.93,
+  },
+  emptyImageContainer: {
+    paddingTop: 200,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

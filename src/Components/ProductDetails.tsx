@@ -4,8 +4,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {MindNightBule, White, Red, Black} from './Color';
 import {PoppinsBold, PoppinsMedium, PoppinsSemiBold} from './Fonts';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import {addToCart} from '../Redux/CartSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart, removeToCart} from '../Redux/CartSlice';
 
 interface ProductDetailsProps {
   route: {
@@ -24,6 +24,7 @@ interface ProductDetailsProps {
 const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const storeData = useSelector(state => state.CartSlice);
   const {name, price, discription, offer, image} = route.params.main;
   const dataItem = route.params.main;
 
@@ -35,6 +36,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
     console.log('Adding to cart');
     dispatch(addToCart(dataItem));
     navigation.navigate('Cart');
+  };
+
+  const removeToCartHandler = () => {
+    console.log('Adding to cart');
+    dispatch(removeToCart(dataItem));
   };
 
   return (
@@ -58,10 +64,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
         <View style={styles.topDetails}>
           <Text style={styles.title}>{name}</Text>
           <View style={styles.priceItem}>
-            <Text style={styles.productDiscount}>
-              <Text>Off</Text> &#8377;{offer}
+            <Text>
+              <Text style={styles.productDiscount}>Off</Text>
+              <Text style={{fontSize: 14, color: Red}}> ₹</Text>
+              <Text style={styles.productDiscount}>{offer}</Text>
             </Text>
-            <Text style={styles.price}> &#8377;{price}</Text>
+            <Text>
+              {' '}
+              <Text style={{fontSize: 20, color: MindNightBule}}>₹</Text>
+              <Text style={styles.price}>{price}</Text>
+            </Text>
           </View>
         </View>
 
@@ -81,15 +93,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
           <Text style={styles.descriptionTitle}>Description</Text>
           <Text style={styles.descriptionContent}>{discription}</Text>
         </View>
-
-        <View style={styles.buttonRow}>
+      </View>
+      <View style={styles.buttonRow}>
+        {storeData.some(value => value.name == dataItem.name) ? (
+          <TouchableOpacity
+            disabled={true}
+            style={styles.buyNowButton2}
+            onPress={removeToCartHandler}
+            activeOpacity={0.8}>
+            <Text style={styles.buyNowText2}>Added to Your Cart</Text>
+          </TouchableOpacity>
+        ) : (
           <TouchableOpacity
             style={styles.buyNowButton}
             onPress={addToCartHandler}
             activeOpacity={0.8}>
             <Text style={styles.buyNowText}>Add to Cart</Text>
           </TouchableOpacity>
-        </View>
+        )}
       </View>
     </View>
   );
@@ -184,11 +205,13 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   buttonRow: {
+    // backgroundColor: 'red',
+    flex: 0.9,
     marginTop: 12,
     marginHorizontal: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    // flexDirection: 'row',
+    justifyContent: 'flex-end',
+    // alignItems: 'center',
   },
   buyNowButton: {
     // height: 60,
@@ -197,8 +220,22 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     width: '100%',
   },
+  buyNowButton2: {
+    // height: 60,
+    // backgroundColor: Red,
+    padding: 10,
+    borderRadius: 25,
+    width: '100%',
+  },
   buyNowText: {
     color: White,
+    textAlign: 'center',
+    fontFamily: PoppinsBold,
+    textTransform: 'uppercase',
+    fontSize: 16,
+  },
+  buyNowText2: {
+    color: Black,
     textAlign: 'center',
     fontFamily: PoppinsBold,
     textTransform: 'uppercase',

@@ -11,28 +11,38 @@ import {
 } from '../Components/Fonts';
 import {useDispatch} from 'react-redux';
 import {itemDecrement, itemIncrement, removeToCart} from '../Redux/CartSlice';
+import {useNavigation} from '@react-navigation/native';
 
 const CartItem = ({item, index}: any) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   console.log(item);
   console.log(index);
+
+  const goToDetails = () => {
+    navigation.navigate('productDetails', {main: item});
+  };
   return (
     <View style={styles.itemBox}>
       <View style={styles.imageContainer}>
-        <Image
-          source={{
-            uri: item.image,
-          }}
-          style={styles.productImage}
-        />
+        <TouchableOpacity onPress={goToDetails}>
+          <Image
+            source={{
+              uri: item.image,
+            }}
+            style={styles.productImage}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.discriptionCondainer}>
-        <Text style={styles.title} numberOfLines={1}>
-          {item.name}
-        </Text>
-        <Text style={styles.discription} numberOfLines={2}>
-          {item.discription}
-        </Text>
+        <TouchableOpacity onPress={goToDetails}>
+          <Text style={styles.title} numberOfLines={1}>
+            {item.name}
+          </Text>
+          <Text style={styles.discription} numberOfLines={2}>
+            {item.discription}
+          </Text>
+        </TouchableOpacity>
         <View style={styles.addItemContainer}>
           <View style={styles.itemAdd}>
             <TouchableOpacity onPress={() => dispatch(itemIncrement(item))}>
@@ -53,7 +63,10 @@ const CartItem = ({item, index}: any) => {
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.price}> &#8377;{item.quantity * item.price}</Text>
+          <Text>
+            <Text style={{fontSize: 22, color: Red}}>₹</Text>
+            <Text style={styles.price}>{item.quantity * item.price}</Text>
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.removeItem}
