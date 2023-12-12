@@ -69,7 +69,6 @@ const BottomTopNavigation = () => {
               />
             );
           },
-          tabBarBadge: 3,
         }}
       />
     </Tab.Navigator>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import React, {useEffect} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -41,14 +42,19 @@ const ProductItems = ({navigation}) => {
             <Text style={styles.loadingText}>Loading..</Text>
           </View>
         ) : (
-          <FlatList
-            data={Item}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-            contentContainerStyle={styles.contentContainer}
-            numColumns={2}
-            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-          />
+          <View>
+            <FlatList
+              style={styles.flatList}
+              data={Item}
+              renderItem={renderItem}
+              keyExtractor={item => item.id.toString()}
+              // contentContainerStyle={styles.contentContainer}
+              numColumns={2}
+              ItemSeparatorComponent={() => (
+                <View style={styles.itemSeparator} />
+              )}
+            />
+          </View>
         )}
       </View>
     </View>
@@ -57,6 +63,11 @@ const ProductItems = ({navigation}) => {
 
 export default ProductItems;
 const styles = StyleSheet.create({
+  flatList: {
+    marginTop: 70,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
   headerItem: {
     flexDirection: 'row',
     marginHorizontal: 20,

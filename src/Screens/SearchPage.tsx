@@ -7,64 +7,97 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Black, Gray, Green, White} from '../Components/Color';
+import {Black, Gray, Green, Red, White} from '../Components/Color';
 import {PoppinsLight, PoppinsRegular} from '../Components/Fonts';
-import Item from '../Components/Data';
 import {GroceryDetails} from '../Components/index';
+import {Item} from '../Components/Data';
+import SearchResult from '../Components/SearchResult';
+import {RefreshControl} from 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const SearchPage = () => {
   const [search, setSearch] = useState('');
   const [result, setResult] = useState([]);
-  console.log(result);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    setResult(Item);
+  }, []);
 
   const searchHandler = () => {
-    const searchData = Item.filter(
-      item => item.name.toLowerCase() === search.toLowerCase(),
+    const searchData = Item.filter(item =>
+      item.name.toLowerCase().includes(search.toLowerCase()),
     );
     setResult(searchData);
     console.log(searchData);
   };
 
   const renderItem = ({item}: any) => {
-    return <GroceryDetails item={item} />;
+    return <SearchResult item={item} />;
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setResult([]);
+    setTimeout(() => {
+      setSearch('');
+      searchHandler();
+      setRefreshing(false);
+    }, 2000);
+  };
+
   return (
-    <SafeAreaView>
-      <View style={styles.serachContainer}>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView>
         <View>
-          <TextInput
-            value={search}
-            placeholder="Search your Grocery Item"
-            style={styles.searchItems}
-            onChangeText={setSearch}
+          <View style={styles.serachContainer}>
+            <View>
+              <TextInput
+                value={search}
+                placeholder="Search your Grocery Item"
+                style={styles.searchItems}
+                onChangeText={setSearch}
+              />
+            </View>
+            <View style={styles.fontIcon}>
+              <TouchableOpacity onPress={searchHandler} activeOpacity={0.8}>
+                <FontAwesome name="search" style={styles.iconText} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style={styles.flatList}>
+          <FlatList
+            data={result}
+            renderItem={renderItem}
+            keyExtractor={item => item.id.toString()}
+            contentContainerStyle={styles.contentContainer}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+              />
+            }
           />
         </View>
-        <View style={styles.fontIcon}>
-          <TouchableOpacity onPress={searchHandler} activeOpacity={0.8}>
-            <FontAwesome name="search" style={styles.iconText} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      {result.length === 0 ? (
-        <View style={styles.searchtem}>
-          <Text style={styles.searchText}> No Search Item</Text>
-        </View>
-      ) : (
-        <FlatList data={result} renderItem={renderItem} />
-      )}
-    </SafeAreaView>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 
 export default SearchPage;
 const styles = StyleSheet.create({
+  flatList: {
+    height: '85%',
+  },
   serachContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 50,
     marginHorizontal: 20,
   },
   fontIcon: {
@@ -100,5 +133,12 @@ const styles = StyleSheet.create({
   searchText: {
     fontFamily: PoppinsRegular,
     fontSize: 20,
+  },
+  contentContainer: {
+    paddingTop: 30,
+    paddingHorizontal: 20,
+  },
+  itemSeparator: {
+    height: 18,
   },
 });

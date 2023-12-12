@@ -2,7 +2,7 @@ import {View, StyleSheet, TextInput, Text} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import {Black, Gray, Green, MindNightBule} from './Color';
+import {Black, Blue, Gray, Green, MindNightBule, White} from './Color';
 import {PoppinsBold, PoppinsLight} from './Fonts';
 
 const SearchItem = () => {
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     height: 50,
   },
   fontIcon: {
-    backgroundColor: Gray,
-    height: 50,
+    backgroundColor: Green,
+    height: 40,
     width: 50,
     textAlign: 'center',
     alignItems: 'center',
@@ -70,15 +70,15 @@ const styles = StyleSheet.create({
   },
   iconText: {
     fontSize: 23,
-    color: Black,
+    color: White,
   },
   searchItems: {
     borderWidth: 1,
     color: Black,
     borderColor: Gray,
     width: 330,
-    padding: 10,
-    fontSize: 16,
+    padding: 5,
+    fontSize: 14,
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     fontFamily: PoppinsLight,
