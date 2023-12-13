@@ -31,7 +31,7 @@ const CartPage = () => {
 
   let Amount = 0;
   storeData.forEach(element => {
-    Amount += element.price;
+    Amount += element.price * element.quantity;
   });
 
   const renterItem = ({item, index}) => {
