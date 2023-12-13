@@ -35,7 +35,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
   const addToCartHandler = () => {
     console.log('Adding to cart');
     dispatch(addToCart(dataItem));
-    navigation.navigate('Cart');
+    navigation.navigate('cart');
   };
 
   const removeToCartHandler = () => {

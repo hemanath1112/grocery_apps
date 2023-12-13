@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import React from 'react';
@@ -24,7 +25,7 @@ const HomePage = ({navigation}: any) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.conatainer}>
       <View style={styles.topBar}>
         <View style={styles.topItem}>
           <View>
@@ -46,10 +47,12 @@ const HomePage = ({navigation}: any) => {
           </View>
         </View>
       </View>
-      <SearchItem />
-      <SliderItem />
-      <SeeMore />
-      <GroceryItem />
+      <ScrollView>
+        <SearchItem />
+        <SliderItem />
+        <SeeMore />
+        <GroceryItem />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -57,6 +60,9 @@ const HomePage = ({navigation}: any) => {
 export default HomePage;
 
 const styles = StyleSheet.create({
+  conatainer: {
+    flex: 1,
+  },
   topBar: {
     marginHorizontal: 22,
     marginTop: 12,

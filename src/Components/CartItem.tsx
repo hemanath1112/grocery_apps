@@ -45,19 +45,17 @@ const CartItem = ({item, index}: any) => {
         </TouchableOpacity>
         <View style={styles.addItemContainer}>
           <View style={styles.itemAdd}>
-            <TouchableOpacity onPress={() => dispatch(itemIncrement(item))}>
+            <TouchableOpacity onPress={() => dispatch(itemDecrement(item))}>
               <MaterialCommunityIcons
-                name="plus-circle-outline"
+                name="minus-circle-outline"
                 size={35}
                 color={Black}
               />
             </TouchableOpacity>
-
             <Text style={styles.itemNumber}>{item.quantity}</Text>
-
-            <TouchableOpacity onPress={() => dispatch(itemDecrement(item))}>
+            <TouchableOpacity onPress={() => dispatch(itemIncrement(item))}>
               <MaterialCommunityIcons
-                name="minus-circle-outline"
+                name="plus-circle-outline"
                 size={35}
                 color={Black}
               />

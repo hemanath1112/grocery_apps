@@ -8,13 +8,19 @@ const GroceryItem = () => {
     return <GroceryDetails item={item} />;
   };
 
+  const SeparatorComponent = () => {
+    return <View style={styles.separator} />;
+  };
+
   return (
     <View style={styles.groceryItem}>
       <FlatList
         data={Item}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
-        horizontal
+        ItemSeparatorComponent={SeparatorComponent}
+        numColumns={2}
+        scrollEnabled={true}
       />
     </View>
   );
@@ -26,5 +32,9 @@ const styles = StyleSheet.create({
   groceryItem: {
     marginHorizontal: 20,
     marginTop: 20,
+    marginBottom: 100,
+  },
+  separator: {
+    height: 15,
   },
 });
