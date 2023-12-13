@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     color: Red,
   },
   flatList: {
-    flex: 0.93,
+    flex: 1,
   },
   emptyImageContainer: {
     paddingTop: 200,

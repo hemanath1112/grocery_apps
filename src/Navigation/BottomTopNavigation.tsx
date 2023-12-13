@@ -56,8 +56,8 @@ const BottomTopNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Cart"
-        component={CartPage}
+        name="userPage"
+        component={UserPage}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => {

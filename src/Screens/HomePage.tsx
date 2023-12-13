@@ -1,5 +1,11 @@
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
-// import Fontisto from 'react-native-vector-icons/Fontisto';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import React from 'react';
 import {PoppinsRegular, PoppinsSemiBold} from '../Components/Fonts';
 import {Black, Green, White} from '../Components/Color';
@@ -9,8 +15,10 @@ import {
   GroceryItem,
   SeeMore,
 } from '../Components/index';
+import {useSelector} from 'react-redux';
 
 const HomePage = ({navigation}: any) => {
+  const storeData = useSelector(state => state.CartSlice);
   const goToCartPage = () => {
     navigation.navigate('cart');
   };
@@ -25,12 +33,16 @@ const HomePage = ({navigation}: any) => {
             </Text>
           </View>
           <View>
-            {/* <TouchableOpacity onPress={goToCartPage}>
+            <TouchableOpacity onPress={goToCartPage}>
               <View style={styles.cartCount}>
-                <Text style={styles.countText}>8</Text>
+                {storeData.length == 0 ? (
+                  <></>
+                ) : (
+                  <Text style={styles.countText}>{storeData.length}</Text>
+                )}
               </View>
               <Fontisto name="shopping-bag" size={28} color={Black} />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -66,17 +78,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 18,
     right: -4,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#27ae60',
     zIndex: 9999,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   countText: {
     color: White,
     fontFamily: PoppinsRegular,
     fontWeight: '700',
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#27ae60',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

@@ -19,11 +19,11 @@ const App = () => {
             component={BottomTopNavigation}
             options={{headerShown: false}}
           />
-          {/* <stack.Screen
-            name="Home"
-            component={HomePage}
+          <stack.Screen
+            name="cart"
+            component={CartPage}
             options={{headerShown: false}}
-          /> */}
+          />
           <stack.Screen
             name="checkOut"
             component={CheckoutPage}

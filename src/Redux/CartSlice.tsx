@@ -46,6 +46,11 @@ const cartSlice = createSlice({
         isAvailable.quantity--;
       }
     },
+    // addItemCart: (state, action: PayloadAction<CartItem>) => {
+    //   const isAvailable = state.findIndex(
+    //     value => value.name === action.payload.name,
+    //   );
+    // },
   },
 });
 

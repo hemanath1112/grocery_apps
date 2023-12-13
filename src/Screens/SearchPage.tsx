@@ -11,7 +11,6 @@ import React, {useEffect, useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Black, Gray, Green, Red, White} from '../Components/Color';
 import {PoppinsLight, PoppinsRegular} from '../Components/Fonts';
-import {GroceryDetails} from '../Components/index';
 import {Item} from '../Components/Data';
 import SearchResult from '../Components/SearchResult';
 import {RefreshControl} from 'react-native-gesture-handler';
