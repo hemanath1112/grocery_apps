@@ -2,8 +2,9 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import Foundation from 'react-native-vector-icons/Foundation';
 import {PoppinsBold} from './Fonts';
-import {MindNightBule, Red} from './Color';
+import {MindNightBule} from './Color';
 import {useNavigation} from '@react-navigation/native';
+
 const SeeMore = ({}) => {
   const navigation = useNavigation();
   const goToProductItem = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {View, FlatList, StyleSheet} from 'react-native';
 import React from 'react';
 import GroceryDetails from './GroceryDetails';
@@ -16,10 +17,12 @@ const GroceryItem = () => {
     <View style={styles.groceryItem}>
       <FlatList
         data={Item}
+        style={styles.flatLIstItem}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
         ItemSeparatorComponent={SeparatorComponent}
-        numColumns={2}
+        horizontal
+        // numColumns={2}
         scrollEnabled={true}
       />
     </View>
@@ -36,5 +39,8 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 15,
+  },
+  flatLIstItem: {
+    paddingBottom: 20,
   },
 });

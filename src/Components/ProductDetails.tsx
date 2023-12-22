@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,7 +25,7 @@ interface ProductDetailsProps {
 const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const storeData = useSelector(state => state.CartSlice);
+  const storeData = useSelector((state: any) => state.CartSlice);
   const {name, price, discription, offer, image} = route.params.main;
   const dataItem = route.params.main;
 
@@ -95,7 +96,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
         </View>
       </View>
       <View style={styles.buttonRow}>
-        {storeData.some(value => value.name == dataItem.name) ? (
+        {storeData.some((value: any) => value.name === dataItem.name) ? (
           <TouchableOpacity
             disabled={true}
             style={styles.buyNowButton2}

@@ -19,7 +19,7 @@ import {
 import {useSelector} from 'react-redux';
 
 const HomePage = ({navigation}: any) => {
-  const storeData = useSelector(state => state.CartSlice);
+  const storeData = useSelector((state: any) => state.CartSlice);
   const goToCartPage = () => {
     navigation.navigate('cart');
   };

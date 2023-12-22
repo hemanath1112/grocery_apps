@@ -13,7 +13,18 @@ import {useDispatch} from 'react-redux';
 import {itemDecrement, itemIncrement, removeToCart} from '../Redux/CartSlice';
 import {useNavigation} from '@react-navigation/native';
 
-const CartItem = ({item, index}: any) => {
+interface CartItemProps {
+  item: {
+    name: string;
+    discription: string;
+    image: string;
+    quantity: number;
+    price: number;
+  };
+  index: number;
+}
+
+const CartItem: React.FC<CartItemProps> = ({item, index}: CartItemProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   console.log(item);
@@ -74,7 +85,6 @@ const CartItem = ({item, index}: any) => {
             size={30}
             color={Black}
           />
-          {/* <Text style={styles.removeName}>Remove</Text> */}
         </TouchableOpacity>
       </View>
     </View>
